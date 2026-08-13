@@ -316,6 +316,43 @@ footer{ background:var(--navy); color:#B9C3D4; padding:76px 0 30px; margin-top:4
 .wa-float:hover .wa-tip{ opacity:1; transform:translateY(-50%) translateX(0); }
 @keyframes pulse{ 0%,100%{ box-shadow:0 12px 26px -8px rgba(37,211,102,.6);} 50%{ box-shadow:0 12px 30px -4px rgba(37,211,102,.9);} }
 
+/* ================= PAGE HEADER (mini hero for interior pages) ================= */
+.page-hero{ padding:150px 0 90px; }
+.page-title{ font-family:'Space Grotesk',sans-serif; font-size:clamp(36px,5vw,54px); font-weight:700; color:#fff; letter-spacing:-0.01em; max-width:640px; margin-bottom:18px; }
+.page-sub{ color:#AEBBD1; font-size:16.5px; line-height:1.7; max-width:520px; }
+
+/* ================= CONTACT PAGE ================= */
+.contact-grid{ display:grid; grid-template-columns:.95fr 1.15fr; gap:60px; align-items:start; }
+.contact-info h2{ font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:700; margin:14px 0 16px; letter-spacing:-0.01em; }
+.contact-info > p{ color:var(--slate); font-size:15px; line-height:1.75; max-width:420px; margin-bottom:36px; }
+.info-list{ display:flex; flex-direction:column; gap:26px; margin-bottom:36px; }
+.info-row{ display:flex; gap:18px; align-items:flex-start; }
+.info-row .ic{ width:46px; height:46px; border-radius:13px; background:var(--bg-soft); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; flex:none; }
+.info-row .ic svg{ width:20px; height:20px; color:var(--blue); }
+.info-row h4{ font-size:15px; font-weight:600; margin-bottom:5px; }
+.info-row p{ font-size:14px; color:var(--slate); line-height:1.6; }
+.info-row a{ color:var(--slate); transition:color .2s; }
+.info-row a:hover{ color:var(--blue); }
+
+.form-card{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:40px; box-shadow:0 30px 60px -34px rgba(10,25,50,.18); }
+.form-card h3{ font-size:22px; font-weight:700; margin-bottom:10px; }
+.form-card > p{ color:var(--slate); font-size:14.5px; margin-bottom:28px; }
+.field-row{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.field{ margin-bottom:20px; }
+.field label{ display:block; font-size:12.5px; font-weight:600; color:var(--slate); margin-bottom:8px; letter-spacing:.2px; }
+.field input, .field select, .field textarea{
+  width:100%; padding:13px 15px; border-radius:11px; border:1.5px solid var(--line); font-family:'Inter',sans-serif;
+  font-size:14.5px; color:var(--ink); background:#fff; transition:border-color .2s, box-shadow .2s; resize:vertical;
+}
+.field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--blue); box-shadow:0 0 0 4px rgba(44,123,229,.12); }
+.field select{ appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238892A4' stroke-width='1.6' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 15px center; padding-right:38px; }
+.hidden-field{ position:absolute; left:-9999px; opacity:0; pointer-events:none; }
+.form-submit{ width:100%; justify-content:center; margin-top:6px; }
+.form-submit:disabled{ opacity:.7; cursor:not-allowed; }
+.form-msg{ margin-top:16px; font-size:13.5px; font-weight:600; min-height:1px; line-height:1.6; }
+.form-msg.is-success{ color:#1F9D55; }
+.form-msg.is-error{ color:#D64545; }
+
 /* ================= PREVIEW BANNER ================= */
 .preview-banner{
   background:#0A0E16; color:#fff; text-align:center; font-size:13px; font-weight:600;
@@ -345,6 +382,7 @@ footer{ background:var(--navy); color:#B9C3D4; padding:76px 0 30px; margin-top:4
   .why-grid{ grid-template-columns:1fr; gap:44px; }
   .why-left{ position:static; }
   .footer-grid{ grid-template-columns:1fr 1fr; row-gap:36px; }
+  .contact-grid{ grid-template-columns:1fr; gap:48px; }
 }
 @media (max-width:720px){
   .wrap{ padding:0 20px; }
@@ -364,4 +402,7 @@ footer{ background:var(--navy); color:#B9C3D4; padding:76px 0 30px; margin-top:4
   .preview-banner{ font-size:11px; padding:9px 12px; }
   .scroll-cue{ display:none; }
   .cursor-glow{ display:none; }
+  .page-hero{ padding:60px 0 52px; }
+  .field-row{ grid-template-columns:1fr; gap:0; }
+  .form-card{ padding:28px 22px; }
 }
