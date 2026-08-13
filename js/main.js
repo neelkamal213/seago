@@ -77,6 +77,64 @@
     } else { runCount(); }
   }
 
+  /* ---------- Web3Forms: Request a Quote (contact page) ---------- */
+  var quoteForm = document.getElementById('quoteForm');
+  if(quoteForm){
+    quoteForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var msg = document.getElementById('formMsg');
+      var btn = quoteForm.querySelector('.form-submit');
+      var label = btn.querySelector('.btn-label');
+      var accessKey = quoteForm.querySelector('[name="access_key"]').value;
+
+      // Guard: the site owner must swap in a real Web3Forms access key (web3forms.com) before this goes live.
+      if(!accessKey || accessKey.indexOf('YOUR_') === 0){
+        msg.textContent = "This form isn't fully connected yet — a Web3Forms access key still needs to be added. Please reach us on WhatsApp or email sales@seago.in in the meantime.";
+        msg.className = 'form-msg is-error';
+        return;
+      }
+
+      // Honeypot: if this hidden field got filled in, silently drop the submission.
+      var honeypot = quoteForm.querySelector('[name="botcheck"]');
+      if(honeypot && honeypot.checked) return;
+
+      btn.disabled = true;
+      var originalLabel = label.textContent;
+      label.textContent = 'Sending…';
+      msg.textContent = '';
+      msg.className = 'form-msg';
+
+      var formData = new FormData(quoteForm);
+      var payload = {};
+      formData.forEach(function(value, key){ payload[key] = value; });
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function(res){ return res.json(); })
+        .then(function(data){
+          if(data && data.success){
+            msg.textContent = "Thanks — we've received your request and will get back to you within one business day.";
+            msg.className = 'form-msg is-success';
+            quoteForm.reset();
+          } else {
+            msg.textContent = (data && data.message) || 'Something went wrong sending your request. Please try again or email us directly.';
+            msg.className = 'form-msg is-error';
+          }
+        })
+        .catch(function(){
+          msg.textContent = 'Something went wrong sending your request. Please try again or email us directly at sales@seago.in.';
+          msg.className = 'form-msg is-error';
+        })
+        .finally(function(){
+          btn.disabled = false;
+          label.textContent = originalLabel;
+        });
+    });
+  }
+
   /* ---------- desktop-only motion: magnetic buttons, hero parallax, cursor glow, card tilt ---------- */
   if(window.matchMedia('(hover:hover)').matches){
 
